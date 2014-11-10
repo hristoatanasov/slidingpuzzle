@@ -1,0 +1,1 @@
+var spApp = angular.module('spApp', []);
