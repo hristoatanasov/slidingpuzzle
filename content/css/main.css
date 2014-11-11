@@ -1,29 +1,50 @@
+/*color picker: http://paletton.com/ */
 body {
    font-family: Helvetica;
-   font-size: 5vw;
-   background-color: #AA3939;
-   color: #FFAAAA;
+   background-color: #A1C99B;
+   color: #4F8F45;
+}
+
+#board {
+   background-color: #C8E0C4;
+   -webkit-border-radius: 5%;
+   -moz-border-radius: 5%;
+   border-radius: 5%;
+}
+
+.board-row {
+   height: 22%;
+   margin-top: 2.5%;
 }
 
 .board-cell {
-   background-color: #FFAAAA;
-   color: #550000;
+   background-color: #E9F1E7;
+   color: #0D6513;
    font-size: 1em;
    font-weight: bold;
    text-align: center;
+   width: 22%;
+   height: 100%;
+   margin-left: 2.5%;
+   border: 0.1em solid #A1C99B;
+   -webkit-border-radius: 25%;
+   -moz-border-radius: 25%;
+   border-radius: 25%;
+   cursor: pointer;
 }
 
-.dummy {
-    margin-top: 100%;
+/**/
+/* http://thephuse.com/development/the-best-way-to-vertically-align-in-css/ */
+.board-cell:before, .board-cell-child   {
+   display: inline-block;
+   vertical-align: middle;
 }
 
-.thumbnail {
-    position: absolute;
-    top: 1vw;
-    bottom: 1vw;
-    left: 1vw;
-    right: 1vw;
-    text-align:center;
-    padding-top:calc(50% - 5vw);
-    background-color: #943A3A;
+.board-cell:before {
+   content: '';
+   display: inline-block;
+   width: 0;
+   height: 100%;
+   vertical-align: middle;
+   margin-left: -0.25em;
 }
