@@ -8,6 +8,7 @@
       <title>Sliding Puzzle</title>
       
       <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+      <link href="content/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet">
       <link href="content/css/main.css" rel="stylesheet">
       
       <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -18,13 +19,13 @@
       <![endif]-->
    </head>
    <body>
-      Hello world!
+      <div class="container">Sliding Puzzle <i class="fa fa-gamepad"></i></div>
       
       <div ng-controller="BoardController">
          <div class="container" id="board">
-            <div class="row board-row" ng-repeat="r in numbers">
-               <div class="col-xs-3 board-cell" ng-repeat="c in r">
-                  <div class="board-cell-child" ng-bind="c"></div>
+            <div class="row board-row" ng-repeat="r in boardItems">
+               <div class="col-xs-3 board-cell" ng-class="{'board-empty-cell': c.number == null, 'board-movable-cell': c.canMove}" ng-repeat="c in r">
+                  <div class="board-cell-child" ng-bind="c.number"></div>
                </div>
             </div>
          </div>

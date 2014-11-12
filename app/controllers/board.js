@@ -1,5 +1,53 @@
 spApp.controller('BoardController', ['$scope', function($scope) {
-   $scope.numbers =  getRandomBoardNumbers();
+   $scope.boardItems = [];
+   
+   var numbers = getRandomBoardNumbers();
+   
+   for (var rowIdx = 0; rowIdx < numbers.length; rowIdx++) {
+      var rowItems = []
+   
+      for (var colIdx = 0; colIdx < numbers[rowIdx].length; colIdx++) {
+         var number = numbers[rowIdx][colIdx];
+         
+         var boardItem = new BoardItem();
+         boardItem.number = number;
+         boardItem.canMove = number != null && canItemMove(rowIdx, colIdx, numbers);
+         
+         rowItems.push(boardItem);
+      }
+      
+      $scope.boardItems.push(rowItems);
+   }
+   
+   function canItemMove(rowIdx, colIdx, numbers) {
+      var canMove = false;
+      
+      if ((validIdx(rowIdx-1, colIdx-1, numbers) && numbers[rowIdx-1][colIdx-1] == null) ||
+          (validIdx(rowIdx-1, colIdx, numbers) && numbers[rowIdx-1][colIdx] == null) || 
+          (validIdx(rowIdx-1, colIdx+1, numbers) && numbers[rowIdx-1][colIdx+1] == null) ||
+          (validIdx(rowIdx, colIdx-1, numbers) && numbers[rowIdx][colIdx-1] == null) ||
+          (validIdx(rowIdx, colIdx, numbers) && numbers[rowIdx][colIdx] == null) || 
+          (validIdx(rowIdx, colIdx+1, numbers) && numbers[rowIdx][colIdx+1] == null) ||
+          (validIdx(rowIdx+1, colIdx-1, numbers) && numbers[rowIdx+1][colIdx-1] == null) ||
+          (validIdx(rowIdx+1, colIdx, numbers) && numbers[rowIdx+1][colIdx] == null) || 
+          (validIdx(rowIdx+1, colIdx+1, numbers) && numbers[rowIdx+1][colIdx+1] == null)
+         )
+         canMove = true;
+      
+      return canMove;
+      
+      function validIdx (rowIdx, colIdx, numbers) {
+         var isValid = true;
+         
+         if (rowIdx < 0 ||
+             rowIdx > 3 ||
+             colIdx < 0 ||
+             colIdx > 3) 
+            isValid = false;
+         
+         return isValid;
+      }
+   }
    
    function getRandomBoardNumbers() {
       var randomBoardNumbers = [];
@@ -24,5 +72,10 @@ spApp.controller('BoardController', ['$scope', function($scope) {
       }
       
       return randomBoardNumbers;
+   }
+   
+   function BoardItem () {
+      this.number = 0;
+      this.canMove = false;
    }
 }]);

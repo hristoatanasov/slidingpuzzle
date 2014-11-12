@@ -30,7 +30,7 @@ body {
    -webkit-border-radius: 25%;
    -moz-border-radius: 25%;
    border-radius: 25%;
-   cursor: pointer;
+   cursor: not-allowed;
 }
 
 /**/
@@ -47,4 +47,16 @@ body {
    height: 100%;
    vertical-align: middle;
    margin-left: -0.25em;
+}
+
+.board-empty-cell {
+   background-color: #0F5A32;
+   border: 0.17em solid #238D8D;
+}
+
+.board-movable-cell:hover {
+   background-color: #0D6513;
+   border: 0.17em solid #E9F1E7;
+   color: #E9F1E7;
+   cursor: pointer;
 }
