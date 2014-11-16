@@ -1,1 +1,1 @@
-var spApp = angular.module('spApp', []);
+var spApp = angular.module('spApp', ['ngAnimate']);

@@ -1,22 +1,18 @@
 spApp.factory('spGame', function(){
-  var canItemMove = function (rowIdx, colIdx, numbers) {
+  var canItemMove = function (rowIdx, colIdx) {
       var canMove = false;
       
-      if ((validIdx(rowIdx-1, colIdx-1, numbers) && numbers[rowIdx-1][colIdx-1] == null) ||
-          (validIdx(rowIdx-1, colIdx, numbers) && numbers[rowIdx-1][colIdx] == null) || 
-          (validIdx(rowIdx-1, colIdx+1, numbers) && numbers[rowIdx-1][colIdx+1] == null) ||
-          (validIdx(rowIdx, colIdx-1, numbers) && numbers[rowIdx][colIdx-1] == null) ||
-          (validIdx(rowIdx, colIdx, numbers) && numbers[rowIdx][colIdx] == null) || 
-          (validIdx(rowIdx, colIdx+1, numbers) && numbers[rowIdx][colIdx+1] == null) ||
-          (validIdx(rowIdx+1, colIdx-1, numbers) && numbers[rowIdx+1][colIdx-1] == null) ||
-          (validIdx(rowIdx+1, colIdx, numbers) && numbers[rowIdx+1][colIdx] == null) || 
-          (validIdx(rowIdx+1, colIdx+1, numbers) && numbers[rowIdx+1][colIdx+1] == null)
+      if ((validIdx(rowIdx-1, colIdx) && spg.boardItems[rowIdx-1][colIdx].number == null) || 
+          (validIdx(rowIdx, colIdx-1) && spg.boardItems[rowIdx][colIdx-1].number == null) ||
+          (validIdx(rowIdx, colIdx) && spg.boardItems[rowIdx][colIdx].number == null) || 
+          (validIdx(rowIdx, colIdx+1) && spg.boardItems[rowIdx][colIdx+1].number == null) ||
+          (validIdx(rowIdx+1, colIdx) && spg.boardItems[rowIdx+1][colIdx].number == null)
          )
          canMove = true;
       
       return canMove;
       
-      function validIdx (rowIdx, colIdx, numbers) {
+      function validIdx (rowIdx, colIdx) {
          var isValid = true;
          
          if (rowIdx < 0 ||
@@ -59,6 +55,15 @@ spApp.factory('spGame', function(){
       this.canMove = false;
    }
    
+   function refreshCanMoveInfo() {
+      for (var rowIdx = 0; rowIdx < spg.boardItems.length; rowIdx++) {
+         for (var colIdx = 0; colIdx < spg.boardItems[rowIdx].length; colIdx++) {
+            var boardItem = spg.boardItems[rowIdx][colIdx];
+            boardItem.canMove = boardItem.number != null && canItemMove(rowIdx, colIdx);
+         }
+      }
+   }
+   
    //----------------------
    
    var spg = {};
@@ -74,12 +79,42 @@ spApp.factory('spGame', function(){
          
          var boardItem = new BoardItem();
          boardItem.number = number;
-         boardItem.canMove = number != null && canItemMove(rowIdx, colIdx, numbers);
          
          rowItems.push(boardItem);
       }
       
       spg.boardItems.push(rowItems);
+   }
+   
+   refreshCanMoveInfo();
+   
+   
+   spg.SlideItem = function (number, arr) {
+      var emptyRowIdx = -1;
+      var emptyColIdx = -1;
+      
+      var numRowIdx = -1;
+      var numColIdx = -1;
+      
+      spg.boardItems = arr;
+      
+      for(var r = 0; r < spg.boardItems.length; r++) {
+         for(var c = 0; c < spg.boardItems.length; c++) {
+            if(spg.boardItems[r][c].number == null) {
+               emptyRowIdx = r;
+               emptyColIdx = c;
+            } else if(spg.boardItems[r][c].number == number) {
+               numRowIdx = r;
+               numColIdx = c;
+            }
+         }
+      }
+      
+      var tmpBoardItem = spg.boardItems[emptyRowIdx][emptyColIdx];
+      spg.boardItems[emptyRowIdx][emptyColIdx] = spg.boardItems[numRowIdx][numColIdx];
+      spg.boardItems[numRowIdx][numColIdx] = tmpBoardItem;
+      
+      refreshCanMoveInfo();
    }
    
    return spg;

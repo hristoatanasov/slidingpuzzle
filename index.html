@@ -24,7 +24,12 @@
       <div ng-controller="BoardController">
          <div class="container" id="board">
             <div class="row board-row" ng-repeat="r in boardItems">
-               <div class="col-xs-3 board-cell" ng-class="{'board-empty-cell': c.number == null, 'board-movable-cell': c.canMove}" ng-repeat="c in r">
+               <div class="col-xs-3 board-cell" 
+                    ng-class="{'board-empty-cell': c.number == null, 'board-movable-cell': c.canMove}" 
+                    ng-repeat="c in r"
+                    board-item
+                    board-item-info="c"
+                    board-items="boardItems" >
                   <div class="board-cell-child" ng-bind="c.number"></div>
                </div>
             </div>
@@ -34,11 +39,13 @@
       <script src="lib/jquery/jquery-1.11.1.min.js"></script>
       <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
       <script src="lib/angularjs/angular.min.js"></script>
+      <script src="lib/angularjs/angular-animate.min.js"></script>
       
       <script src="content/js/dom.js"></script>
       
       <script src="app/app.js"></script>
       <script src="app/controllers/board.js"></script>
       <script src="app/services/spGame.js"></script>
+      <script src="app/directives/boardItem.js"></script>
    </body>
 </html>

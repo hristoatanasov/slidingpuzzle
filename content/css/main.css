@@ -30,10 +30,9 @@ body {
    -webkit-border-radius: 25%;
    -moz-border-radius: 25%;
    border-radius: 25%;
-   cursor: not-allowed;
+   cursor: default;
 }
 
-/**/
 /* http://thephuse.com/development/the-best-way-to-vertically-align-in-css/ */
 .board-cell:before, .board-cell-child   {
    display: inline-block;
@@ -59,4 +58,136 @@ body {
    border: 0.17em solid #E9F1E7;
    color: #E9F1E7;
    cursor: pointer;
+}
+
+
+/*shake idea from here: http://www.cssscript.com/shake-html-elements-with-css3-animations-and-transforms-linkquake/ */
+.shake {
+	-webkit-animation-name: shakeAnim;
+   -moz-animation-name: shakeAnim;
+	animation-name: shakeAnim;
+   
+	-webkit-animation-duration: 0.3s;
+	-moz-animation-duration: 0.3s;
+	animation-duration: 0.3s;
+	
+   -webkit-transform-origin:150% 150%;
+	-moz-transform-origin:150% 150%;
+	transform-origin:150% 150%;
+	
+   -webkit-animation-iteration-count: infinite;
+	-moz-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
+	
+   -webkit-animation-timing-function: linear;
+	-moz-animation-timing-function: linear;
+	animation-timing-function: linear;
+}
+
+@keyframes shakeAnim {
+	0%   { 
+		transform: translate(2px, 1px)   rotate(0deg); 
+	}
+	10%  { 
+		transform: translate(-1px, -2px) rotate(-1deg); 
+	}
+	20%  { 
+		transform: translate(-3px, 0px)  rotate(1deg); 
+	}
+	30%  { 
+		transform: translate(0px, 2px)   rotate(0deg); 
+	}
+	40%  { 
+		transform: translate(1px, -1px)  rotate(1deg); 
+	}
+	50%  { 
+		transform: translate(-1px, 1px)  rotate(-1deg); 
+	}
+	60%  { 
+		transform: translate(-3px, -2px)  rotate(0deg); 
+	}
+	70%  { 
+		transform: translate(2px, 1px)   rotate(-1deg); 
+	}
+	80%  { 
+		transform: translate(-1px, -2px) rotate(1deg); 
+	}
+	90%  { 
+		transform: translate(2px, -1px)   rotate(0deg); 
+	}
+	100% { 
+		transform: translate(1px, -2px)  rotate(-1deg); 
+	}
+}
+
+@-moz-keyframes shakeAnim { /* Firefox */
+	0%   { 
+		-moz-transform: translate(2px, 1px)   rotate(0deg); 
+	}
+	10%  { 
+		-moz-transform: translate(-1px, -2px) rotate(-1deg); 
+	}
+	20%  { 
+		-moz-transform: translate(-3px, 0px)  rotate(1deg); 
+	}
+	30%  { 
+		-moz-transform: translate(0px, 2px)   rotate(0deg); 
+	}
+	40%  { 
+		-moz-transform: translate(1px, -1px)  rotate(1deg); 
+	}
+	50%  { 
+		-moz-transform: translate(-1px, 1px)  rotate(-1deg); 
+	}
+	60%  { 
+		-moz-transform: translate(-3px, -2px)  rotate(0deg); 
+	}
+	70%  { 
+		-moz-transform: translate(2px, 1px)   rotate(-1deg); 
+	}
+	80%  { 
+		-moz-transform: translate(-1px, -2px) rotate(1deg); 
+	}
+	90%  { 
+		-moz-transform: translate(2px, -1px)   rotate(0deg); 
+	}
+	100% { 
+		-moz-transform: translate(1px, -2px)  rotate(-1deg); 
+	}
+}
+
+@-webkit-keyframes shakeAnim { /* Safari and Chrome */
+	0%   { 
+		-webkit-transform: translate(2px, 1px)   rotate(0deg); 
+	}
+	10%  { 
+		-webkit-transform: translate(-1px, -2px) rotate(-1deg); 
+	}
+	20%  { 
+		-webkit-transform: translate(-3px, 0px)  rotate(1deg); 
+	}
+	30%  { 
+		-webkit-transform: translate(0px, 2px)   rotate(0deg); 
+	}
+	40%  { 
+		-webkit-transform: translate(1px, -1px)  rotate(1deg); 
+	}
+	50%  { 
+		-webkit-transform: translate(-1px, 1px)  rotate(-1deg); 
+	}
+	60%  { 
+		-webkit-transform: translate(-3px, -2px)  rotate(0deg); 
+	}
+	70%  { 
+		-webkit-transform: translate(2px, 1px)   rotate(-1deg); 
+	}
+	80%  { 
+		-webkit-transform: translate(-1px, -2px) rotate(1deg); 
+	}
+	90%  { 
+		-webkit-transform: translate(2px, -1px)   rotate(0deg); 
+	}
+	100% { 
+		-webkit-transform: translate(1px, -2px)  rotate(-1deg); 
+	}
 }
