@@ -7,7 +7,7 @@
 - [ ] Refactor the code of the game module
 - [x] Add handler for keyboard events
 - [x] Add handler for swipe events
-- [ ] Key press and div focus
+- [x] Key press and div focus
 - [ ] Swipe up/down?
 - [ ] Make the board size configurable
 - [ ] Add timer
