@@ -33,7 +33,7 @@ spApp.factory('spGame', function(){
          allAvailableNumbers.push(i + 1);
       }
       
-      allAvailableNumbers[Math.floor(Math.random() * allAvailableNumbers.length)] = null;
+      allAvailableNumbers[allAvailableNumbers.length - 1] = null;
    
       while (allAvailableNumbers.length > 0) {
          var rowNumbers = [];
@@ -61,6 +61,25 @@ spApp.factory('spGame', function(){
             var boardItem = spg.boardItems[rowIdx][colIdx];
             boardItem.canMove = boardItem.number != null && canItemMove(rowIdx, colIdx);
          }
+      }
+   }
+   
+   function getEmptyItemCoordinates(arr) {
+      var emptyRowIdx = -1;
+      var emptyColIdx = -1;
+      
+      for(var r = 0; r < arr.length; r++) {
+         for(var c = 0; c < arr.length; c++) {
+            if(arr[r][c].number == null) {
+               emptyRowIdx = r;
+               emptyColIdx = c;
+            }
+         }
+      }
+      
+      return {
+         row: emptyRowIdx,
+         col: emptyColIdx
       }
    }
    
@@ -113,6 +132,86 @@ spApp.factory('spGame', function(){
       var tmpBoardItem = spg.boardItems[emptyRowIdx][emptyColIdx];
       spg.boardItems[emptyRowIdx][emptyColIdx] = spg.boardItems[numRowIdx][numColIdx];
       spg.boardItems[numRowIdx][numColIdx] = tmpBoardItem;
+      
+      refreshCanMoveInfo();
+   }
+   
+   spg.SlideLeft = function (arr) {
+      var emptyRowIdx = -1;
+      var emptyColIdx = -1;
+      
+      spg.boardItems = arr;
+      
+      var emptyItemCoordinates = getEmptyItemCoordinates(arr);
+      emptyRowIdx = emptyItemCoordinates.row;
+      emptyColIdx = emptyItemCoordinates.col;
+      
+      if (emptyColIdx == 0)
+         return;
+      
+      var tmpBoardItem = spg.boardItems[emptyRowIdx][emptyColIdx];
+      spg.boardItems[emptyRowIdx][emptyColIdx] = spg.boardItems[emptyRowIdx][emptyColIdx - 1];
+      spg.boardItems[emptyRowIdx][emptyColIdx - 1] = tmpBoardItem;
+      
+      refreshCanMoveInfo();
+   }
+   
+   spg.SlideRight = function (arr) {
+      var emptyRowIdx = -1;
+      var emptyColIdx = -1;
+      
+      spg.boardItems = arr;
+      
+      var emptyItemCoordinates = getEmptyItemCoordinates(arr);
+      emptyRowIdx = emptyItemCoordinates.row;
+      emptyColIdx = emptyItemCoordinates.col;
+      
+      if (emptyColIdx == spg.boardItems.length - 1)
+         return;
+      
+      var tmpBoardItem = spg.boardItems[emptyRowIdx][emptyColIdx];
+      spg.boardItems[emptyRowIdx][emptyColIdx] = spg.boardItems[emptyRowIdx][emptyColIdx + 1];
+      spg.boardItems[emptyRowIdx][emptyColIdx + 1] = tmpBoardItem;
+      
+      refreshCanMoveInfo();
+   }
+   
+   spg.SlideUp = function (arr) {
+      var emptyRowIdx = -1;
+      var emptyColIdx = -1;
+      
+      spg.boardItems = arr;
+      
+      var emptyItemCoordinates = getEmptyItemCoordinates(arr);
+      emptyRowIdx = emptyItemCoordinates.row;
+      emptyColIdx = emptyItemCoordinates.col;
+      
+      if (emptyRowIdx == 0)
+         return;
+      
+      var tmpBoardItem = spg.boardItems[emptyRowIdx][emptyColIdx];
+      spg.boardItems[emptyRowIdx][emptyColIdx] = spg.boardItems[emptyRowIdx - 1][emptyColIdx];
+      spg.boardItems[emptyRowIdx - 1][emptyColIdx] = tmpBoardItem;
+      
+      refreshCanMoveInfo();
+   }
+   
+   spg.SlideDown = function (arr) {
+      var emptyRowIdx = -1;
+      var emptyColIdx = -1;
+      
+      spg.boardItems = arr;
+      
+      var emptyItemCoordinates = getEmptyItemCoordinates(arr);
+      emptyRowIdx = emptyItemCoordinates.row;
+      emptyColIdx = emptyItemCoordinates.col;
+      
+      if (emptyRowIdx == spg.boardItems.length - 1)
+         return;
+      
+      var tmpBoardItem = spg.boardItems[emptyRowIdx][emptyColIdx];
+      spg.boardItems[emptyRowIdx][emptyColIdx] = spg.boardItems[emptyRowIdx + 1][emptyColIdx];
+      spg.boardItems[emptyRowIdx + 1][emptyColIdx] = tmpBoardItem;
       
       refreshCanMoveInfo();
    }

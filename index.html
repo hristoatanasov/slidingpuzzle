@@ -22,7 +22,10 @@
       <div class="container">Sliding Puzzle <i class="fa fa-gamepad"></i></div>
       
       <div ng-controller="BoardController">
-         <div class="container" id="board">
+         <div  tabindex="1" class="container" id="board"
+              ng-swipe-left="swipeLeft();"
+              ng-swipe-right="swipeRight();"
+              ng-keydown="keyPress($event);" >
             <div class="row board-row" ng-repeat="r in boardItems">
                <div class="col-xs-3 board-cell" 
                     ng-class="{'board-empty-cell': c.number == null, 'board-movable-cell': c.canMove}" 
@@ -40,6 +43,7 @@
       <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
       <script src="lib/angularjs/angular.min.js"></script>
       <script src="lib/angularjs/angular-animate.min.js"></script>
+      <script src="lib/angularjs/angular-touch.min.js"></script>
       
       <script src="content/js/dom.js"></script>
       
