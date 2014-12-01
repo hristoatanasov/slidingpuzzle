@@ -23,7 +23,7 @@ function setBoardSize(){
       width: $squareside
    }); 
    
-   var $fontsize = Math.round($squareside / 10);
+   var $fontsize = Math.round($squareside / 11.8);
    
    $(document.body).css({
       fontSize: $fontsize + "px"
