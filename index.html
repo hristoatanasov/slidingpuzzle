@@ -25,7 +25,8 @@
          <div  tabindex="1" class="container" id="board"
               ng-swipe-left="swipeLeft();"
               ng-swipe-right="swipeRight();"
-              ng-keydown="keyPress($event);" >
+              ng-keydown="keyPress($event);" 
+              focus-me="{{focusTheBoard}}">
             <div class="row board-row" ng-repeat="r in boardItems">
                <div class="col-xs-3 board-cell" 
                     ng-class="{'board-empty-cell': c.number == null, 'board-movable-cell': c.canMove}" 
@@ -51,5 +52,6 @@
       <script src="app/controllers/board.js"></script>
       <script src="app/services/spGame.js"></script>
       <script src="app/directives/boardItem.js"></script>
+      <script src="app/directives/focusMe.js"></script>
    </body>
 </html>

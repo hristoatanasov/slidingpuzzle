@@ -1,4 +1,6 @@
 spApp.controller('BoardController', ['$scope', 'spGame', function($scope, spGame) {
+   $scope.focusTheBoard = true;
+
    $scope.boardItems = spGame.boardItems;
    
    $scope.swipeLeft = function () {
